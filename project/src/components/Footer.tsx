@@ -6,8 +6,8 @@ import logo from '../img/logo.png';
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-black/90 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
@@ -108,7 +108,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm">
+        <div className="border-t border-white/10 mt-4 pt-4 flex flex-col sm:flex-row justify-between items-center gap-1 text-xs sm:text-sm">
           <p className="text-gray-400">
             © 2025 Upliftx. All rights reserved.
           </p>

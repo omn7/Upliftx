@@ -6,7 +6,6 @@ import { ApplicationModal } from '../components/ApplicationModal';
 import { HeroSection } from '../components/ui/hero-section-3';
 import { LoadingSpinner } from '../components/ui/loading-spinner';
 import { supabase, Database } from '../lib/supabase';
-import { SupabaseTest } from '../components/SupabaseTest';
 
 type Opportunity = Database['public']['Tables']['opportunities']['Row'];
 
@@ -116,11 +115,6 @@ export const Home: React.FC = () => {
       <HeroSection />
 
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 bg-black text-white">
-        {/* Temporary Supabase Test - Remove after debugging */}
-        <div className="mb-8">
-          <SupabaseTest />
-        </div>
-
         {/* Search and Filter */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row gap-4">

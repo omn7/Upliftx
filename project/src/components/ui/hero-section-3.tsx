@@ -7,6 +7,7 @@ import { cn } from '../../lib/utils'
 import { Link } from 'react-router-dom'
 import { InfiniteSlider } from './infinite-slider'
 import { ProgressiveBlur } from './progressive-blur'
+import volimg1 from '../../img/volimg1.png';
 
 const transitionVariants = {
     item: {
@@ -109,6 +110,31 @@ export function HeroSection() {
 }
 
 const AppComponent = () => {
+    // Pie chart data (random example)
+    const activeVolunteers = 60;
+    const opportunities = 40;
+    const total = activeVolunteers + opportunities;
+    const activeAngle = (activeVolunteers / total) * 360;
+    const oppAngle = (opportunities / total) * 360;
+    // Pie chart arc helper
+    function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
+        const start = polarToCartesian(cx, cy, r, endAngle);
+        const end = polarToCartesian(cx, cy, r, startAngle);
+        const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+        const d = [
+            "M", start.x, start.y,
+            "A", r, r, 0, largeArcFlag, 0, end.x, end.y,
+            "L", cx, cy, "Z"
+        ].join(" ");
+        return d;
+    }
+    function polarToCartesian(cx: number, cy: number, r: number, angle: number) {
+        const rad = (angle - 90) * Math.PI / 180.0;
+        return {
+            x: cx + r * Math.cos(rad),
+            y: cy + r * Math.sin(rad)
+        };
+    }
     return (
         <div className="relative space-y-3 rounded-[1rem] bg-white/5 p-4">
             <div className="flex items-center gap-1.5 text-orange-400">
@@ -127,25 +153,17 @@ const AppComponent = () => {
                             d="M23 21.851c0 4.042-3.519 7.291-7.799 7.144c-4.62-.156-7.788-4.384-7.11-8.739C9.07 14.012 15.48 10 15.48 10S23 14.707 23 21.851"></path>
                     </g>
                 </svg>
-                <div className="text-sm font-medium">Steps</div>
+                <div className="text-sm font-medium">Volunteering Impact</div>
             </div>
-            <div className="space-y-3">
-                <div className="text-foreground border-b border-white/10 pb-3 text-sm font-medium">This year, you're walking more on average than you did in 2023.</div>
-                <div className="space-y-3">
-                    <div className="space-y-1">
-                        <div className="space-x-1">
-                            <span className="text-foreground align-baseline text-xl font-medium">8,081</span>
-                            <span className="text-muted-foreground text-xs">Steps/day</span>
-                        </div>
-                        <div className="flex h-5 items-center rounded bg-gradient-to-l from-emerald-400 to-indigo-600 px-2 text-xs text-white">2024</div>
-                    </div>
-                    <div className="space-y-1">
-                        <div className="space-x-1">
-                            <span className="text-foreground align-baseline text-xl font-medium">5,412</span>
-                            <span className="text-muted-foreground text-xs">Steps/day</span>
-                        </div>
-                        <div className="text-foreground bg-muted flex h-5 w-2/3 items-center rounded px-2 text-xs dark:bg-white/20">2023</div>
-                    </div>
+            <div className="text-foreground border-b border-white/10 pb-3 text-sm font-medium">You made a bigger difference this year than last year!</div>
+            <div className="flex flex-col items-center gap-2">
+                <svg width="100" height="100" viewBox="0 0 40 40">
+                    <path d={describeArc(20, 20, 16, 0, activeAngle)} fill="#34d399" />
+                    <path d={describeArc(20, 20, 16, activeAngle, 360)} fill="#6366f1" />
+                </svg>
+                <div className="flex justify-center gap-4 mt-2 text-xs">
+                    <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full bg-emerald-400"></span> Active Volunteers ({activeVolunteers})</span>
+                    <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full bg-indigo-500"></span> Opportunities ({opportunities})</span>
                 </div>
             </div>
         </div>
@@ -161,13 +179,13 @@ const menuItems = [
 
 const LogoCloud = () => {
     return (
-        <section className="bg-background pb-16 md:pb-32">
-            <div className="group relative m-auto max-w-6xl px-6">
+        <section className="bg-background pb-16 md:pb-32 overflow-x-hidden">
+            <div className="group relative m-auto max-w-6xl px-2 sm:px-6 overflow-x-hidden">
                 <div className="flex flex-col items-center md:flex-row">
                     <div className="inline md:max-w-44 md:border-r md:pr-6">
                         <p className="text-end text-sm">Powering the best teams</p>
                     </div>
-                    <div className="relative py-6 md:w-[calc(100%-11rem)]">
+                    <div className="relative py-6 w-full md:w-[calc(100%-11rem)] max-w-full overflow-x-auto">
                         <InfiniteSlider
                             duration={40}
                             durationOnHover={20}

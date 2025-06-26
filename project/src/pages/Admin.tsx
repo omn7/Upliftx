@@ -216,68 +216,6 @@ export const Admin: React.FC = () => {
     }
   };
 
-  const testDatabasePermissions = async () => {
-    try {
-      console.log('Testing database permissions...');
-      
-      // Test SELECT
-      const { data: selectData, error: selectError } = await staticSupabase
-        .from('opportunities')
-        .select('id')
-        .limit(1);
-      console.log('SELECT test:', { selectData, selectError });
-      
-      // Test INSERT
-      const testOpportunity = {
-        title: 'TEST OPPORTUNITY - DELETE ME',
-        description: 'This is a test opportunity',
-        category: 'Test',
-        location: 'Test Location',
-        date: '2024-12-31',
-        max_volunteers: 1,
-        is_active: false
-      };
-      
-      const { data: insertData, error: insertError } = await staticSupabase
-        .from('opportunities')
-        .insert(testOpportunity)
-        .select('id');
-      console.log('INSERT test:', { insertData, insertError });
-      
-      if (insertData && insertData[0]) {
-        // Test UPDATE
-        const { data: updateData, error: updateError } = await staticSupabase
-          .from('opportunities')
-          .update({ title: 'TEST OPPORTUNITY - UPDATED' })
-          .eq('id', insertData[0].id)
-          .select('id');
-        console.log('UPDATE test:', { updateData, updateError });
-        
-        // Test DELETE
-        const { data: deleteData, error: deleteError } = await staticSupabase
-          .from('opportunities')
-          .delete()
-          .eq('id', insertData[0].id)
-          .select('id');
-        console.log('DELETE test:', { deleteData, deleteError });
-      }
-      
-      const results = {
-        select: !selectError,
-        insert: !insertError,
-        update: !insertError && insertData && insertData[0],
-        delete: !insertError && insertData && insertData[0]
-      };
-      
-      console.log('Permission test results:', results);
-      alert(`Database permission test results:\nSELECT: ${results.select ? '✅' : '❌'}\nINSERT: ${results.insert ? '✅' : '❌'}\nUPDATE: ${results.update ? '✅' : '❌'}\nDELETE: ${results.delete ? '✅' : '❌'}`);
-      
-    } catch (error) {
-      console.error('Database permission test failed:', error);
-      alert(`Database permission test failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  };
-
   const handleApplicationStatus = async (applicationId: string, status: 'approved' | 'rejected') => {
     try {
       console.log('Attempting to update application status:', { applicationId, status });
@@ -562,24 +500,6 @@ export const Admin: React.FC = () => {
             <p className="text-gray-400 mt-2">Manage volunteer opportunities</p>
           </div>
           <div className="flex space-x-3">
-            <button
-              onClick={testDatabasePermissions}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 shadow-lg"
-            >
-              <span>Test DB</span>
-            </button>
-            <button
-              onClick={testRatingFunctionality}
-              className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center space-x-2 shadow-lg"
-            >
-              <span>Test Rating</span>
-            </button>
-            <button
-              onClick={testDeleteFunctionality}
-              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center space-x-2 shadow-lg"
-            >
-              <span>Test Delete</span>
-            </button>
             <button
               onClick={() => setShowForm(true)}
               className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors flex items-center space-x-2 shadow-lg"
