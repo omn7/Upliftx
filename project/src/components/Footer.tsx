@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import logo from '../img/logo.png';
-import lightlogo from '../img/lightlogo.png';
+import lightlogo from '../img/light bg.png';
 import { useTheme } from '../contexts/ThemeContext';
 
 export const Footer: React.FC = () => {

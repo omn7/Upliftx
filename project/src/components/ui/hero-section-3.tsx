@@ -7,7 +7,6 @@ import { cn } from '../../lib/utils'
 import { Link } from 'react-router-dom'
 import { InfiniteSlider } from './infinite-slider'
 import { ProgressiveBlur } from './progressive-blur'
-import volimg1 from '../../img/volimg1.png';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const transitionVariants = {

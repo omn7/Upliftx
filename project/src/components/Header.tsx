@@ -4,7 +4,7 @@ import { User, Menu, X, Settings, LogOut, Sun, Moon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../img/logo.png';
-import lightlogo from '../img/lightlogo.png';
+import lightlogo from '../img/light bg.png';
 import { useTheme } from '../contexts/ThemeContext';
 
 const navLinks = [
