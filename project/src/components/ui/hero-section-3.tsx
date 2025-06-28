@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { InfiniteSlider } from './infinite-slider'
 import { ProgressiveBlur } from './progressive-blur'
 import volimg1 from '../../img/volimg1.png';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const transitionVariants = {
     item: {
@@ -30,6 +31,8 @@ const transitionVariants = {
 }
 
 export function HeroSection() {
+    const { isDark } = useTheme();
+    
     return (
         <main>
             <section className="relative min-h-[60vh] overflow-hidden">
@@ -57,11 +60,15 @@ export function HeroSection() {
                             }}
                         >
                             <h1
-                                className="text-balance text-2xl font-semibold sm:text-4xl md:text-5xl md:font-medium">
+                                className={`text-balance text-2xl font-semibold sm:text-4xl md:text-5xl md:font-medium transition-colors duration-300 ${
+                                    isDark ? 'text-white' : 'text-[#2D3436]'
+                                }`}>
                                 Uplift X Events
                             </h1>
 
-                            <p className="mx-auto mt-4 max-w-xl text-pretty text-base sm:text-lg">
+                            <p className={`mx-auto mt-4 max-w-xl text-pretty text-base sm:text-lg transition-colors duration-300 ${
+                                isDark ? 'text-gray-300' : 'text-gray-600'
+                            }`}>
                             Find your purpose, build your network, and contribute to something truly special.
                             </p>
 
@@ -88,14 +95,24 @@ export function HeroSection() {
                                 aria-hidden
                                 className="bg-radial from-primary/50 dark:from-primary/25 relative mx-auto mt-32 max-w-2xl to-transparent to-55% text-left"
                             >
-                                <div className="bg-background border-border/50 absolute inset-0 mx-auto w-80 -translate-x-3 -translate-y-12 rounded-[2rem] border p-2 [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:-translate-x-6">
-                                    <div className="relative h-96 overflow-hidden rounded-[1.5rem] border p-2 pb-12 before:absolute before:inset-0 before:bg-[repeating-linear-gradient(-45deg,var(--border),var(--border)_1px,transparent_1px,transparent_6px)] before:opacity-50"></div>
+                                <div className={`border-border/50 absolute inset-0 mx-auto w-80 -translate-x-3 -translate-y-12 rounded-[2rem] border p-2 [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:-translate-x-6 transition-colors duration-300 ${
+                                    isDark ? 'bg-black/20 border-white/10' : 'bg-white/20 border-gray-300/20'
+                                }`}>
+                                    <div className={`relative h-96 overflow-hidden rounded-[1.5rem] border p-2 pb-12 before:absolute before:inset-0 before:bg-[repeating-linear-gradient(-45deg,var(--border),var(--border)_1px,transparent_1px,transparent_6px)] before:opacity-50 transition-colors duration-300 ${
+                                        isDark ? 'border-white/10' : 'border-gray-300/20'
+                                    }`}></div>
                                 </div>
-                                <div className="bg-muted dark:bg-background/50 border-border/50 mx-auto w-80 translate-x-4 rounded-[2rem] border p-2 backdrop-blur-3xl [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:translate-x-8">
-                                    <div className="bg-background space-y-2 overflow-hidden rounded-[1.5rem] border p-2 shadow-xl dark:bg-white/5 dark:shadow-black dark:backdrop-blur-3xl">
+                                <div className={`border-border/50 mx-auto w-80 translate-x-4 rounded-[2rem] border p-2 backdrop-blur-3xl [mask-image:linear-gradient(to_bottom,#000_50%,transparent_90%)] sm:translate-x-8 transition-colors duration-300 ${
+                                    isDark ? 'bg-black/50 border-white/10' : 'bg-white/50 border-gray-300/20'
+                                }`}>
+                                    <div className={`space-y-2 overflow-hidden rounded-[1.5rem] border p-2 shadow-xl backdrop-blur-3xl transition-colors duration-300 ${
+                                        isDark ? 'bg-black/5 border-white/10' : 'bg-white/5 border-gray-300/20'
+                                    }`}>
                                         <AppComponent />
 
-                                        <div className="bg-muted rounded-[1rem] p-4 pb-16 dark:bg-white/5"></div>
+                                        <div className={`rounded-[1rem] p-4 pb-16 transition-colors duration-300 ${
+                                            isDark ? 'bg-white/5' : 'bg-gray-100/50'
+                                        }`}></div>
                                     </div>
                                 </div>
                                 <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] mix-blend-overlay [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] dark:opacity-5" />
@@ -110,6 +127,8 @@ export function HeroSection() {
 }
 
 const AppComponent = () => {
+    const { isDark } = useTheme();
+    
     // Pie chart data (random example)
     const activeVolunteers = 60;
     const opportunities = 40;
@@ -136,7 +155,9 @@ const AppComponent = () => {
         };
     }
     return (
-        <div className="relative space-y-3 rounded-[1rem] bg-white/5 p-4">
+        <div className={`relative space-y-3 rounded-[1rem] p-4 transition-all duration-300 ${
+            isDark ? 'bg-white/5' : 'glass-gradient'
+        }`}>
             <div className="flex items-center gap-1.5 text-orange-400">
                 <svg
                     className="size-5"
@@ -155,7 +176,9 @@ const AppComponent = () => {
                 </svg>
                 <div className="text-sm font-medium">Volunteering Impact</div>
             </div>
-            <div className="text-foreground border-b border-white/10 pb-3 text-sm font-medium">You made a bigger difference this year than last year!</div>
+            <div className={`border-b pb-3 text-sm font-medium transition-all duration-300 ${
+                isDark ? 'text-white border-white/10' : 'text-[#2D3436] border-white/20'
+            }`}>You made a bigger difference this year than last year!</div>
             <div className="flex flex-col items-center gap-2">
                 <svg width="100" height="100" viewBox="0 0 40 40">
                     <path d={describeArc(20, 20, 16, 0, activeAngle)} fill="#34d399" />
@@ -178,12 +201,18 @@ const menuItems = [
 ]
 
 const LogoCloud = () => {
+    const { isDark } = useTheme();
+    
     return (
-        <section className="bg-background pb-16 md:pb-32 overflow-x-hidden">
+        <section className={`pb-16 md:pb-32 overflow-x-hidden transition-colors duration-300 ${
+            isDark ? 'bg-black' : 'bg-[#e8faea]'
+        }`}>
             <div className="group relative m-auto max-w-6xl px-2 sm:px-6 overflow-x-hidden">
                 <div className="flex flex-col items-center md:flex-row">
                     <div className="inline md:max-w-44 md:border-r md:pr-6">
-                        <p className="text-end text-sm">Powering the best teams</p>
+                        <p className={`text-end text-sm transition-colors duration-300 ${
+                            isDark ? 'text-gray-400' : 'text-gray-600'
+                        }`}>Powering the best teams</p>
                     </div>
                     <div className="relative py-6 w-full md:w-[calc(100%-11rem)] max-w-full overflow-x-auto">
                         <InfiniteSlider

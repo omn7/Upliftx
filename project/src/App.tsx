@@ -10,11 +10,13 @@ import Profile from './pages/Profile';
 import { LoadingSpinner } from './components/ui/loading-spinner';
 import AdminLogin from './pages/AdminLogin';
 import NotFound from './pages/NotFound';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
 const PUBLISHABLE_KEY = 'pk_test_ZGlzdGluY3QtY29sbGllLTQyLmNsZXJrLmFjY291bnRzLmRldiQ';
 
-function App() {
+function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     // Simulate initial loading time
@@ -36,7 +38,9 @@ function App() {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <Router>
-        <div className="min-h-screen bg-black">
+        <div className={`min-h-screen transition-colors duration-300 ${
+          isDark ? 'bg-black' : 'bg-[#e8faea]'
+        }`}>
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -50,6 +54,14 @@ function App() {
         </div>
       </Router>
     </ClerkProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
